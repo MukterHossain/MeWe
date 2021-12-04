@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ly_Parent_Login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
+
+
+    <TextView
+        android:id="@+id/tv_Brandname"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="MeWe"
+        android:textColor="@color/mauvalous_500"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/ly_Login_form"
+        app:layout_constraintEnd_toEndOf="@+id/ly_Login_form"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/ly_Login_form"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <LinearLayout
+        android:id="@+id/ly_Login_form"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edtx_Email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/edtx_Password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Ly_Login_btn"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_primary_nostok_100">
+
+            <TextView
+                android:id="@+id/tx_Login_inside"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_Bottom_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ly_Login_form"
+        app:layout_constraintStart_toStartOf="@+id/ly_Login_form"
+        app:layout_constraintTop_toBottomOf="@+id/ly_Login_form"
+        app:layout_constraintVertical_bias="0.2">
+
+        <TextView
+            android:id="@+id/tx_Notify_Signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I have No Account Yet?"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tx_Createone_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Create One"
+            android:textColor="@color/mauvalous_700"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

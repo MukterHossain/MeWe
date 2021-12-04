@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "878731743573",
+    "firebase_url": "https://mewe-5c54f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mewe-5c54f",
+    "storage_bucket": "mewe-5c54f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878731743573:android:746eefc28fa7c3d6905fdc",
+        "android_client_info": {
+          "package_name": "com.triplesss.mewe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878731743573-8mc4ae92org9754opolamq3ft7eju898.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.triplesss.mewe",
+            "certificate_hash": "3c385e5f5e620e1635ed958abf9a0426af697f2c"
+          }
+        },
+        {
+          "client_id": "878731743573-mee66ke7u5p5h1r75aab58ucm8bmccsl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaky4IJmcaVDtLZciy7MKexwVsHAERBDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878731743573-mee66ke7u5p5h1r75aab58ucm8bmccsl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

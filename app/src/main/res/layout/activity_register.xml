@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ly_parent"
+    tools:context=".RegisterActivity">
+
+
+    <TextView
+        android:id="@+id/tv_Brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MeWe"
+        android:textColor="@color/color_main"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/ly_Register_form"
+        app:layout_constraintEnd_toEndOf="@+id/ly_Register_form"
+        app:layout_constraintStart_toStartOf="@+id/ly_Register_form"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <LinearLayout
+        android:id="@+id/ly_Register_form"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edtx_Name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:hint="name"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/edtx_Email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:ems="10"
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/edtxmobile"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:ems="10"
+            android:hint="mobile"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:id="@+id/ly_Gender_radio"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rg_Gender"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbg_Male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Male"
+                    android:textColor="@color/radio_btn"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rbg_Female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textColor="@color/radio_btn"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rbg_Others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others"
+                    android:textColor="@color/radio_btn"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtxDateofbirth"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="date of birth"
+            android:inputType="none"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/edtx_Password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_transparent_primary_100"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textAlignment="center" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Ly_Register_btn"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_primary_nostok_100">
+
+            <TextView
+                android:id="@+id/tx_Register_inside"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_Bottom_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ly_Register_form"
+        app:layout_constraintStart_toStartOf="@+id/ly_Register_form"
+        app:layout_constraintTop_toBottomOf="@+id/ly_Register_form"
+        app:layout_constraintVertical_bias="0.2">
+
+        <TextView
+            android:id="@+id/tx_Notify_Signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I Already have an Account."
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tx_Signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Sign In"
+            android:textColor="@color/color_main"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

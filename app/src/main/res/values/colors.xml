@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mauvalous_200">#FDB2C2</color>
+    <color name="mauvalous_500">#FFA0B4</color>
+    <color name="mauvalous_700">#FF7F9A</color>
+    <color name="teal_200">#FDE2E4</color>
+    <color name="teal_700">#FFD8DB</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="porfile_back">#F5F5F5</color>
+    <color name="btn_back">@color/mauvalous_500</color>
+    <color name="color_main">@color/mauvalous_700</color>
+    <color name="radio_btn">@color/mauvalous_200</color>
+    <color name="stoke">@color/mauvalous_200</color>
+
+</resources>
