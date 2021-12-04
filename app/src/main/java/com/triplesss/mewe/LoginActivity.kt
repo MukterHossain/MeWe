@@ -23,10 +23,10 @@ class LoginActivity : AppCompatActivity() {
         var auth = Firebase.auth
         val currentuser = auth.currentUser
 
-//        if (currentuser != null) {
-//            startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
-//            finish()
-//        }
+        if (currentuser != null) {
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
+        }
 
 
 //        var ParentLy = findViewById<ConstraintLayout>(id.ly_Parent_Login)
@@ -85,9 +85,9 @@ class LoginActivity : AppCompatActivity() {
                     if (it.isSuccessful) {
 
                         Toast.makeText(this@LoginActivity, "Login Succed",Toast.LENGTH_SHORT).show()
-//                        var intent = Intent(this@LoginActivity, ProfileActivity::class.java)
-//                        startActivity(intent)
-//                        finish()
+                        var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@LoginActivity, "Check Internet! Login UnSucced",Toast.LENGTH_SHORT).show()
                     }

@@ -4,8 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/bg_primary_nostok_100.xml" value="0.240625" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/profile_form_backgroud.xml" value="0.240625" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_register.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/fragment_message.xml" value="0.1" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/fragment_people.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/fragment_profile.xml" value="0.21041666666666667" />
       </map>
     </option>
   </component>
