@@ -16,31 +16,34 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.triplesss.mewe.DataModel.UserDetails
 import com.triplesss.mewe.R.*
+import com.triplesss.mewe.databinding.ActivityRegisterBinding
 import java.util.*
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
+    lateinit var bind : ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout.activity_register)
+        var bind = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(bind.root)
 //        Initialize firebase auth
         val auth = Firebase.auth
         val database = Firebase.firestore
 //        Initialize view
-        var btRegister = findViewById<ConstraintLayout>(id.Ly_Register_btn)
-        var name = findViewById<EditText>(id.edtx_Name)
-        var email = findViewById<EditText>(id.edtx_Email)
-        var mobile = findViewById<EditText>(id.edtxmobile)
-        var dateofbirth = findViewById<EditText>(id.edtxDateofbirth)
-        var password = findViewById<EditText>(id.edtx_Password)
-        var signin = findViewById<TextView>(id.tx_Signin)
+        var btRegister = bind.LyRegisterBtn
+        var name = bind.edtxName
+        var email = bind.edtxEmail
+        var mobile = bind.edtxmobile
+        var dateofbirth = bind.edtxDateofbirth
+        var password = bind.edtxPassword
+        var signin = bind.txSignin
 
-        var genderGroup = findViewById<RadioGroup>(id.rg_Gender)
-        var rgbMale = findViewById<RadioButton>(id.rbg_Male)
-        var rgbFemale = findViewById<RadioButton>(id.rbg_Female)
-        var rgbOthers = findViewById<RadioButton>(id.rbg_Others)
+        var genderGroup = bind.rgGender
+        var rgbMale = bind.rbgMale
+        var rgbFemale = bind.rbgFemale
+        var rgbOthers = bind.rbgOthers
         var gender = "Male"
-        var parent = findViewById<ConstraintLayout>(id.ly_parent)
+        var parent = bind.lyParent
 
 //        sign in button intent
         signin.setOnClickListener {

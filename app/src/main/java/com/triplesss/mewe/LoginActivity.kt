@@ -1,39 +1,53 @@
 package com.triplesss.mewe
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.TextUtils
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.Observer
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.triplesss.mewe.DataModel.UserDetails
 import com.triplesss.mewe.R.*
+import com.triplesss.mewe.ViewModel.CurrentUserModel
+import com.triplesss.mewe.databinding.ActivityLoginBinding
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
+    private var auth = Firebase.auth
+    lateinit var bind : ActivityLoginBinding
+    private val cUserModel : CurrentUserModel by viewModels()
+    var currentUser = auth.currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout.activity_login)
+        bind = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(bind.root)
 
-        var auth = Firebase.auth
-        val currentuser = auth.currentUser
+        if (currentUser != null) {
+            cUserModel.setSignin(true)
 
-        if (currentuser != null) {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-            finish()
-        }
+            }
 
-
-//        var ParentLy = findViewById<ConstraintLayout>(id.ly_Parent_Login)
-        var btLogin = findViewById<ConstraintLayout>(id.Ly_Login_btn)
-        var email = findViewById<EditText>(id.edtx_Email)
-        var password = findViewById<EditText>(id.edtx_Password)
-        var createOne = findViewById<TextView>(id.tx_Createone_btn)
+        cUserModel.signIn.observe(this, Observer {
+            if (it.equals(true)){
+                var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
 
         //password validation check
         fun isPasswordValid(pass: String): Boolean {
@@ -60,44 +74,42 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        btLogin.setOnClickListener {
-            val mail = email.text.toString()
+        bind.LyLoginBtn.setOnClickListener {
+            val mail = bind.edtxEmail.text.toString()
             if (TextUtils.isEmpty(mail)) {
-                email.setError("Enter Email!")
+                bind.edtxEmail.setError("Enter Email!")
                 return@setOnClickListener
             }
             if (!isEmailValid(mail)){
-                email.error = "Enter valid email"
+                bind.edtxEmail.error = "Enter valid email"
                 return@setOnClickListener
             }
-            val pass = password.text.toString()
+            val pass = bind.edtxPassword.text.toString()
             if (TextUtils.isEmpty(pass)) {
-                password.setError("Enter Password!")
+                bind.edtxPassword.setError("Enter Password!")
                 return@setOnClickListener
             }
             if (!isPasswordValid(pass)) {
-                password.setError("Enter valid Pass")
+                bind.edtxPassword.setError("Enter valid Pass")
                 return@setOnClickListener
             }
 
-            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+            auth.signInWithEmailAndPassword(mail,pass)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-
-                        Toast.makeText(this@LoginActivity, "Login Succed",Toast.LENGTH_SHORT).show()
-                        var intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        cUserModel.setSignin(true)
+                        Toast.makeText(this@LoginActivity, "Logged",Toast.LENGTH_SHORT).show()
                     } else {
+                        cUserModel.setSignin(false)
                         Toast.makeText(this@LoginActivity, "Check Internet! Login UnSucced",Toast.LENGTH_SHORT).show()
                     }
                 }
         }
-
-        createOne.setOnClickListener {
+        bind.txCreateoneBtn.setOnClickListener {
             var intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
+
 }
