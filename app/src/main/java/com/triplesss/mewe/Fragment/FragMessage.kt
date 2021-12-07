@@ -36,9 +36,9 @@ class FragMessage(): Fragment() {
         bind = FragmentMessageBinding.inflate(LayoutInflater.from(context),container,false)
         bind.lyRecycleMessage.layoutManager = LinearLayoutManager(context)
 
-        cUserModel.messUserList.observe(viewLifecycleOwner, Observer {
-            var messUserList = it
-            var lastMessList = cUserModel.lastMessList.value
+        cUserModel.lastMessList.observe(viewLifecycleOwner, Observer {
+            var lastMessList = it
+            var messUserList = cUserModel.messUserList.value
             if(lastMessList !== null && messUserList !=null){
                 var adapter = MessageListAdapter(context!!,messUserList,lastMessList)
                 bind.lyRecycleMessage.adapter = adapter

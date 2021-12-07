@@ -12,9 +12,13 @@ class CurrentUserModel :  ViewModel(){
     val signIn = MutableLiveData<Boolean>()
     val lastMessList = MutableLiveData<ArrayList<LastMessage>>()
     val messUserList = MutableLiveData<ArrayList<UserDetails>>()
+    val allUserList = MutableLiveData<ArrayList<UserDetails>>()
 
     fun setUserfmodel(newData : UserDetails){
         currentUserObj.value = newData
+    }
+    fun setAllUserList(data : ArrayList<UserDetails>){
+        allUserList.value = data
     }
     fun setRecivedusrfmodel(newData : UserDetails){
         recivedUserObj.value = newData

@@ -17,7 +17,7 @@
         android:paddingTop="7dp"
         android:paddingEnd="10dp"
         android:paddingBottom="7dp"
-        android:text="recived Messages"
+        android:text=" hi every one"
         android:textColor="@color/color_main"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,14 +30,16 @@
 
     <TextView
         android:id="@+id/tx_Time_recived"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:gravity="center"
         android:hint="time"
-        android:textSize="12sp"
+        android:maxLines="1"
+        android:textSize="8sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tx_reciveMes"
-        app:layout_constraintStart_toStartOf="@+id/tx_reciveMes"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tx_reciveMes"
         tools:visibility="visible" />
 
@@ -51,7 +53,7 @@
         android:paddingTop="7dp"
         android:paddingEnd="10dp"
         android:paddingBottom="7dp"
-        android:text="send messages"
+        android:text="hi"
         android:textColor="#FFFFFF"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,14 +66,16 @@
 
     <TextView
         android:id="@+id/tx_Time_send"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
         android:hint="time"
-        android:textSize="12sp"
+        android:maxLines="1"
+        android:textSize="8sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tx_sendMes"
-        app:layout_constraintStart_toStartOf="@+id/tx_sendMes"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tx_sendMes"
         tools:visibility="visible" />
 

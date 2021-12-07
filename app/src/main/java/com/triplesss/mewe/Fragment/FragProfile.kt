@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -41,16 +42,15 @@ class FragProfile() : Fragment() {
 
 //        oberve current user model data
         cUserModel.currentUserObj.observe(viewLifecycleOwner,{
-            if (it?.email != null) {
                 bind.txNameBox.text = it?.name
                 bind.txEmailBox.text = it?.email
                 bind.txMobileBox.text = it?.mobile
                 bind.txGenderBox.text = it?.gender
                 bind.txDobBox.text = it?.dateOfBirth
-            } else {
-                var snackbar = Snackbar.make(bind.lyParentProfile,"User Data Null",Snackbar.LENGTH_SHORT)
-                snackbar.show()
-            }
+            Glide.with(context!!).load(it?.profileUri)
+                .placeholder(R.drawable.user)
+                .into(bind.imageProfile)
+
         })
 
 

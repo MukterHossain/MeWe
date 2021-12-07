@@ -27,8 +27,8 @@ class ChatListAdapter(context: Context, messageList: ArrayList<Message>,currentU
         if (SenderId.equals(cUserId)){
             holder.bind.txSendMes.setText(messageList[position].message)
             holder.bind.txTimeSend.setText(messageList[position].timeStamp)
-//            holder.recivedmess.visibility = View.GONE
-//            holder.timeRecived.visibility = View.GONE
+            holder.bind.txReciveMes.visibility = View.GONE
+            holder.bind.txTimeRecived.visibility = View.GONE
             holder.bind.txSendMes.visibility = View.VISIBLE
             holder.bind.txTimeSend.visibility = View.VISIBLE
         }else {
@@ -36,8 +36,8 @@ class ChatListAdapter(context: Context, messageList: ArrayList<Message>,currentU
             holder.bind.txTimeRecived.setText(messageList[position].timeStamp)
             holder.bind.txReciveMes.visibility = View.VISIBLE
             holder.bind.txTimeRecived.visibility = View.VISIBLE
-//            holder.sendmess.visibility = View.GONE
-//            holder.timeSend.visibility = View.GONE
+            holder.bind.txSendMes.visibility = View.GONE
+            holder.bind.txTimeSend.visibility = View.GONE
         }
     }
 

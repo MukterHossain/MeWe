@@ -32,11 +32,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_select"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:srcCompat="@drawable/user" />
+            app:srcCompat="@drawable/user"
+            app:shapeAppearanceOverlay="@style/circular_view"
+            app:strokeColor="@color/stoke"
+            app:strokeWidth="3dp"
+            android:padding="2dp"
+            />
 
         <EditText
             android:id="@+id/edtx_Name"

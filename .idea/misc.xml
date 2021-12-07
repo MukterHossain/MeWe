@@ -5,11 +5,14 @@
       <map>
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/back_button.xml" value="0.240625" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/bg_primary_nostok_100.xml" value="0.240625" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/bg_stoke_trans_10_splash.xml" value="0.240625" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/profile_form_backgroud.xml" value="0.240625" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/drawable/splash_bg_solid.xml" value="0.240625" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_chat.xml" value="0.43623481781376516" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/activity_splash.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/dialog_loading.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/fragment_message.xml" value="0.1" />
         <entry key="..\:/Users/MisterM/AndroidStudioProjects/MeWeVersion2/app/src/main/res/layout/fragment_people.xml" value="0.22447916666666667" />

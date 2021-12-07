@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -49,6 +50,7 @@ class ChatActivity : AppCompatActivity() {
         val reciveName = intent.getStringExtra("RecivedUserName")
         var reciverUid= intent.getStringExtra("RecivedUserUid")
         var reciverEmail= intent.getStringExtra("RecivedUserEmail")
+        var reciverUri = intent.getStringExtra("ReciverUri")
 
 
 //        data retrive recived User
@@ -73,6 +75,7 @@ class ChatActivity : AppCompatActivity() {
 //        set data from intent to chat activity screen
         bind.txNameChat.text = reciveName
         bind.txEmailChat.text = reciverEmail
+        Glide.with(this).load(reciverUri).placeholder(R.drawable.user).into(bind.imgProfile)
 
         var senderRoom : String = currentUUid.toString()+reciverUid.toString()
         var reciverRoom : String = reciverUid.toString()+currentUUid.toString()
@@ -86,19 +89,21 @@ class ChatActivity : AppCompatActivity() {
         var messageList = ArrayList<Message>()
 
         var adapter = ChatListAdapter(this,messageList,currentUUid!!)
+        bind.recycleChat.setHasFixedSize(true)
         bind.recycleChat.layoutManager = LinearLayoutManager(this)
         bind.recycleChat.adapter = adapter
 
         docRef.reference.child("chatRoom").child(senderRoom!!).child("messages")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    docRef.reference.child("MessageUserList").child(reciverUid!!).child(currentUUid).child("LastMessage").child("seen").setValue(true)
+                    docRef.reference.child("MessageUserList").child(currentUUid).child(reciverUid).child("LastMessage").child("seen").setValue(true)
                     messageList.clear()
                     for(post in snapshot.children){
                         val message = post.getValue(Message::class.java)
                         messageList.add(message!!)
                     }
                     adapter.notifyDataSetChanged()
+                    bind.recycleChat.scrollToPosition(messageList.size-1)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -106,6 +111,9 @@ class ChatActivity : AppCompatActivity() {
                 }
 
             })
+        bind.txMessageBox.setOnClickListener{
+            bind.recycleChat.scrollToPosition(messageList.size-1)
+        }
 
 
 
@@ -124,8 +132,8 @@ class ChatActivity : AppCompatActivity() {
 
             val messObject = Message(message,currentUUid.toString(),nowtime)
 
-            var lastMessforReciver = LastMessage(message,nowtime,true)
-            var lastMessforSender = LastMessage(message,nowtime,false)
+            var lastMessforReciver = LastMessage(message,nowtime,false)
+            var lastMessforSender = LastMessage(message,nowtime,true)
 
 
             docRef.reference.child("chatRoom").child(senderRoom).child("messages").child(randomMessKey)
@@ -139,9 +147,7 @@ class ChatActivity : AppCompatActivity() {
                                 .addOnSuccessListener {
                                     docRef.reference.child("MessageUserList").child(reciverUid!!).child(currentUUid).child("LastMessage").setValue(lastMessforReciver)
                                 }
-//                            Toast.makeText(this,"ReciverRoom Updated", Toast.LENGTH_SHORT).show()
                         }
-//                Toast.makeText(this,"senderRoom Updated",Toast.LENGTH_SHORT).show()
                 }
             bind.txMessageBox.setText("")
 

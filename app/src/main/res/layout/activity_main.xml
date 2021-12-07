@@ -32,8 +32,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="6dp"
+            android:background="@drawable/bg_primary_nostok_100"
             android:text="Message"
-            android:textColor="@color/color_main"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -42,11 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/bg_primary_nostok_100"
             android:gravity="center"
             android:padding="5dp"
             android:text="Profile"
-            android:textColor="@color/white"
+            android:textColor="@color/color_main"
             android:textSize="20sp" />
 
         <TextView

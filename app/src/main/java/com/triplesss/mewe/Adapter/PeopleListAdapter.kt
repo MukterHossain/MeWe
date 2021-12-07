@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.triplesss.mewe.ChatActivity
 import com.triplesss.mewe.DataModel.UserDetails
 import com.triplesss.mewe.R
@@ -18,7 +19,8 @@ class PeopleListAdapter(val context: Context, val allUserArray: ArrayList<UserDe
 
     override fun onBindViewHolder(holder: myViewholder, position: Int) {
 
-        holder.bind.imgProfile.setImageResource(R.drawable.user)
+        Glide.with(context).load(allUserArray[position].profileUri).placeholder(R.drawable.user)
+            .into(holder.bind.imgProfile)
         holder.bind.txNamePeople.text = allUserArray[position].name
         holder.bind.txEmailPeople.text = allUserArray[position].email
 
@@ -27,6 +29,7 @@ class PeopleListAdapter(val context: Context, val allUserArray: ArrayList<UserDe
             intent.putExtra("RecivedUserName",allUserArray[position].name)
             intent.putExtra("RecivedUserUid",allUserArray[position].uid)
             intent.putExtra("RecivedUserEmail",allUserArray[position].email)
+            intent.putExtra("ReciverUri",allUserArray[position].profileUri)
             context.startActivity(intent)
         }
     }

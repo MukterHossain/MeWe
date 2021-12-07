@@ -5,10 +5,13 @@ import android.app.Dialog
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.*
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.UserInfo
@@ -16,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.triplesss.mewe.DataModel.UserDetails
 import com.triplesss.mewe.R.*
 import com.triplesss.mewe.databinding.ActivityRegisterBinding
@@ -24,6 +28,9 @@ import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var bind : ActivityRegisterBinding
+    var storageImageUri :String = "null"
+    var imageUri: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var bind = ActivityRegisterBinding.inflate(layoutInflater)
@@ -38,6 +45,7 @@ class RegisterActivity : AppCompatActivity() {
 //        Initialize firebase auth
         val auth = Firebase.auth
         val database = Firebase.firestore
+        val storagaRef = Firebase.storage
 //        Initialize view
         var btRegister = bind.LyRegisterBtn
         var name = bind.edtxName
@@ -53,6 +61,7 @@ class RegisterActivity : AppCompatActivity() {
         var rgbOthers = bind.rbgOthers
         var gender = "Male"
         var parent = bind.lyParent
+
 
 //        sign in button intent
         signin.setOnClickListener {
@@ -130,18 +139,27 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 //        Working with profile images
+
+
+        //        image getting activity
+        val getImageIntent = registerForActivityResult(ActivityResultContracts.GetContent(),
+            ActivityResultCallback {
+                if(it !=null){
+                    bind.imgSelect.setImageURI(it)
+                    imageUri = it
+                }
+            })
+
         bind.imgSelect.setOnClickListener {
-            var intent = Intent()
-            intent.action = Intent.ACTION_PICK
-            intent.type = "image/*"
-            startActivityForResult(intent,100)
+            getImageIntent.launch("image/*")
         }
 
 
 
 //register button cliked
         btRegister.setOnClickListener {
-            val nametext = name.text.toString()
+
+            val nametext = name.text.toString().trim()
             if (TextUtils.isEmpty(nametext)) {
                 name.error = "Your Name is empty"
                 return@setOnClickListener
@@ -151,7 +169,7 @@ class RegisterActivity : AppCompatActivity() {
                 name.error = "Name should be Maximum 20 char"
                 return@setOnClickListener
             }
-            val emailtext = email.text.toString()
+            val emailtext = email.text.toString().trim()
             if (TextUtils.isEmpty(emailtext)) {
                 email.error = "Enter Email!"
                 return@setOnClickListener
@@ -189,33 +207,41 @@ class RegisterActivity : AppCompatActivity() {
 
             dialog.show()
             auth.createUserWithEmailAndPassword(
-                email.text.toString().trim(),
-                password.text.toString().trim()
+                emailtext,
+                pass
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     val currentUserUid = auth.currentUser?.uid.toString()
-                    val user = UserDetails(currentUserUid,nametext,emailtext,mobilenum,gender, dateOfBirth)
+//                    upload image and retrive imageUri
 
-                    var dbreference : DocumentReference = database.collection("users").document(currentUserUid)
-                    dbreference.set(user).addOnSuccessListener {
-                        Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: $currentUserUid")
+                    if(imageUri != null){
+                        var upimageUri = storagaRef.reference.child("ProfileImages").child(currentUserUid)
+                        upimageUri.putFile(imageUri!!).addOnCompleteListener{
+                            upimageUri.downloadUrl.addOnSuccessListener {
+                                storageImageUri = it.toString()
+                                val user = UserDetails(currentUserUid,storageImageUri,nametext,emailtext,mobilenum,gender, dateOfBirth)
 
+                                database.collection("users").document(currentUserUid).set(user).addOnSuccessListener {
+                                    dialog.dismiss()
+                                    var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                            Toast.makeText(this,"image upload done",Toast.LENGTH_SHORT).show()
+                        }
+                    }else{
+                        val user = UserDetails(currentUserUid,storageImageUri,nametext,emailtext,mobilenum,gender, dateOfBirth)
+                        database.collection("users").document(currentUserUid).set(user).addOnSuccessListener {
+                            dialog.dismiss()
+                            var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                     }
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Registration Succesfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                }else{
                     dialog.dismiss()
-                    var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Registration failed! Check internet Connection",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this,"Find Problems!Try Again Later",Toast.LENGTH_SHORT).show()
                 }
             }
         }

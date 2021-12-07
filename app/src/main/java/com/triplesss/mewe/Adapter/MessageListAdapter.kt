@@ -3,10 +3,12 @@ package com.triplesss.mewe.Adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.triplesss.mewe.ChatActivity
 import com.triplesss.mewe.DataModel.LastMessage
 import com.triplesss.mewe.DataModel.UserDetails
@@ -30,14 +32,15 @@ class MessageListAdapter(context: Context, userList: ArrayList<UserDetails>, las
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
-        holder.bind.imgProfile.setImageResource(R.drawable.user)
+        Glide.with(context).load(userList[position].profileUri).placeholder(R.drawable.user)
+            .into(holder.bind.imgProfile)
         holder.bind.txNameMessage.text = userList[position].name
         holder.bind.txLastMessage.text = lastMessage[position].lastMessage
         holder.bind.txTimeShow.text = lastMessage[position].time
         holder.bind.txTimeShow.visibility = View.VISIBLE
-        if(lastMessage[position].seen!!.equals(false)){
-            holder.bind.txTimeShow.setTextColor(R.color.color_main)
-            holder.bind.txLastMessage.setTextSize(14F)
+        if(lastMessage[position].seen!! == false){
+            holder.bind.txTimeShow.setTextColor(Color.parseColor("#FF0000"))
+//            holder.bind.txLastMessage.setTextAppearance(context, android.R.style.TextAppearance_Medium);
         }
 
         holder.bind.lyParentMessageListup.setOnClickListener{
@@ -45,6 +48,7 @@ class MessageListAdapter(context: Context, userList: ArrayList<UserDetails>, las
             intent.putExtra("RecivedUserName",userList[position].name)
             intent.putExtra("RecivedUserUid",userList[position].uid)
             intent.putExtra("RecivedUserEmail",userList[position].email)
+            intent.putExtra("ReciverUri",userList[position].profileUri)
             context.startActivity(intent)
         }
     }

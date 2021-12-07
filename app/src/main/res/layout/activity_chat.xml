@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/btn_Back_chat"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:src="@drawable/back_button" />
 
@@ -114,8 +114,8 @@
 
         <ImageView
             android:id="@+id/btn_Send_message"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             app:srcCompat="@drawable/send_button" />

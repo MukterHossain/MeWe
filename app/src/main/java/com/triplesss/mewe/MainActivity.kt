@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
                     var user = it.toObject<UserDetails>()
                     if (user?.email != null) {
                         cUserModel.setUserfmodel(user!!)
-
                     }
                 }
             }
@@ -83,15 +82,16 @@ class MainActivity : AppCompatActivity() {
 
         firestoRef.collection("users").get()
             .addOnSuccessListener {
+                allUserList.clear()
                 it.documents.forEach{
                     var user = it.toObject<UserDetails>()
-                    if (currentUid != user?.uid){
+                    if (currentUid != user?.uid && user?.email.toString() != "admin@gmail.com"){
                         allUserList.add(user!!)
+//                        dialog.dismiss()
                     }
                 }
+                cUserModel.setAllUserList(allUserList)
             }
-
-
 
         //better way to retrive userkey list
         docRef.reference.child("MessageUserList").child(currentUid).addValueEventListener(object :ValueEventListener{
@@ -101,14 +101,14 @@ class MainActivity : AppCompatActivity() {
                 for(user in snapshot.children){
                     var userObj = user.child("userObj").getValue(UserDetails::class.java)
                     var messObj = user.child("LastMessage").getValue(LastMessage::class.java)
-                    messUserList.add(userObj!!)
-                    lasMessList.add(messObj!!)
-                    dialog.dismiss()
+                    if (userObj !=null && messObj !=null) {
+                        messUserList.add(userObj!!)
+                        lasMessList.add(messObj!!)
+                    }
                 }
-//                Log.d(TAG,"user ${messUserList}")
-//                Log.d(TAG,"Last mess ${lasMessList}")
                 cUserModel.setmessUserList(messUserList)
                 cUserModel.setlastMessList(lasMessList)
+                dialog.dismiss()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
 //        Fragment define
         val fragMessage = FragMessage()
         val fragProfile = FragProfile()
-        val fragPeople = FragPeople(allUserList)
+        val fragPeople = FragPeople()
 
 //        ViewModel working
         cUserModel.signIn.observe(this, Observer {
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
 
 //        Home Screen Setup
         val fragManager = supportFragmentManager
-        fragManager.beginTransaction().replace(id.frag_Main,fragProfile).commit()
+        fragManager.beginTransaction().replace(id.frag_Main,fragMessage).commit()
 
 //        navigation button
         val scrMessage = bind.btnMessageTx
