@@ -1,7 +1,9 @@
 package com.triplesss.mewe
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.TextUtils
@@ -35,6 +37,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(bind.root)
+
+        val dialog = Dialog(this)
+        dialog.setContentView(layout.dialog_loading)
+        dialog.setCancelable(false)
+        if(dialog.window !=null){
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+        }
 
         if (currentUser != null) {
             cUserModel.setSignin(true)
@@ -93,14 +102,16 @@ class LoginActivity : AppCompatActivity() {
                 bind.edtxPassword.setError("Enter valid Pass")
                 return@setOnClickListener
             }
-
+            dialog.show()
             auth.signInWithEmailAndPassword(mail,pass)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         cUserModel.setSignin(true)
-                        Toast.makeText(this@LoginActivity, "Logged",Toast.LENGTH_SHORT).show()
+                        dialog.dismiss()
+//                        Toast.makeText(this@LoginActivity, "Logged",Toast.LENGTH_SHORT).show()
                     } else {
                         cUserModel.setSignin(false)
+                        dialog.dismiss()
                         Toast.makeText(this@LoginActivity, "Check Internet! Login UnSucced",Toast.LENGTH_SHORT).show()
                     }
                 }

@@ -1,8 +1,10 @@
 package com.triplesss.mewe
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -26,6 +28,13 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var bind = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(bind.root)
+
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_loading)
+        dialog.setCancelable(false)
+        if(dialog.window !=null){
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+        }
 //        Initialize firebase auth
         val auth = Firebase.auth
         val database = Firebase.firestore
@@ -64,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                     val month = month + 1
                     var msg = "$dayOfMonth-$month-$year"
                     dateofbirth.setText(msg)
-                    Toast.makeText(this@RegisterActivity, msg, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@RegisterActivity, msg, Toast.LENGTH_SHORT).show()
                     mydate = dayOfMonth
                     mymonth = month
                     myYear = year
@@ -80,27 +89,13 @@ class RegisterActivity : AppCompatActivity() {
         genderGroup.setOnCheckedChangeListener { genderGroupe, checkedId ->
             if (checkedId == rgbMale.id) {
                 gender = "Male"
-                Toast.makeText(
-                    this@RegisterActivity,
-                    "${gender} Selected",
-                    Toast.LENGTH_SHORT
-                ).show()
                 return@setOnCheckedChangeListener
             } else if (checkedId == rgbFemale.id) {
                 gender = "Female"
-                Toast.makeText(
-                    this@RegisterActivity,
-                    "${gender} Selected",
-                    Toast.LENGTH_SHORT
-                ).show()
                 return@setOnCheckedChangeListener
             } else if (checkedId == rgbOthers.id) {
                 gender = "Others"
-                Toast.makeText(
-                    this@RegisterActivity,
-                    "${gender} Selected",
-                    Toast.LENGTH_SHORT
-                ).show()
+                return@setOnCheckedChangeListener
             }
         }
 
@@ -133,6 +128,15 @@ class RegisterActivity : AppCompatActivity() {
                         "$"
             ).matcher(pass).matches()
         }
+
+//        Working with profile images
+        bind.imgSelect.setOnClickListener {
+            var intent = Intent()
+            intent.action = Intent.ACTION_PICK
+            intent.type = "image/*"
+            startActivityForResult(intent,100)
+        }
+
 
 
 //register button cliked
@@ -183,7 +187,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
+            dialog.show()
             auth.createUserWithEmailAndPassword(
                 email.text.toString().trim(),
                 password.text.toString().trim()
@@ -202,7 +206,7 @@ class RegisterActivity : AppCompatActivity() {
                         "Registration Succesfully",
                         Toast.LENGTH_SHORT
                     ).show()
-
+                    dialog.dismiss()
                     var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()

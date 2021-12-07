@@ -18,17 +18,19 @@ class PeopleListAdapter(val context: Context, val allUserArray: ArrayList<UserDe
 
     override fun onBindViewHolder(holder: myViewholder, position: Int) {
 
-        holder.bind.imgProfile.setImageResource(R.drawable.sample_photo)
+        holder.bind.imgProfile.setImageResource(R.drawable.user)
         holder.bind.txNamePeople.text = allUserArray[position].name
         holder.bind.txEmailPeople.text = allUserArray[position].email
 
         holder.bind.icSendBtn.setOnClickListener{
             val intent = Intent(context, ChatActivity::class.java)
-//            intent.putExtra("RecivedUserName",allUserArray[position].name)
-//            intent.putExtra("RecivedUserUid",allUserArray[position].uid)
+            intent.putExtra("RecivedUserName",allUserArray[position].name)
+            intent.putExtra("RecivedUserUid",allUserArray[position].uid)
+            intent.putExtra("RecivedUserEmail",allUserArray[position].email)
             context.startActivity(intent)
         }
     }
+
 
     override fun getItemCount(): Int {
         return allUserArray.size

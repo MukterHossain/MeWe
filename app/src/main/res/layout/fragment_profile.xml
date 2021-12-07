@@ -27,7 +27,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/sample_photo"
+            android:src="@drawable/user"
             app:shapeAppearanceOverlay="@style/circular_view"
             app:strokeColor="@color/stoke"
             app:strokeWidth="3dp"
@@ -207,33 +207,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Ly_Edit_profile_btn"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_primary_nostok_100">
-
-                <TextView
-                    android:id="@+id/tx_editprofile_inside"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit Profile"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/Ly_Logout_btn"

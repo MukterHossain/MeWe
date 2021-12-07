@@ -26,15 +26,11 @@ class FragPeople(val allUserList : ArrayList<UserDetails>): Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bind = FragmentPeopleBinding.inflate(layoutInflater,container,false)
-        val view = bind.root
-        bind.lyRecyclePeople.layoutManager = LinearLayoutManager(context)
+
         bind.lyRecyclePeople.layoutManager = LinearLayoutManager(context)
         var adapter =PeopleListAdapter(context!!,allUserList)
-
         bind.lyRecyclePeople.adapter =adapter
 
-
-
-            return view
+            return bind.root
     }
 }
